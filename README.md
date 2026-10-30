@@ -13,12 +13,7 @@
 
 **Profesora:** Ing. Irina Fong
 
-**Integrantes:**
-
-| Nombre | Cédula |
-|---|---|
-| `<nombre 1>` | `<cédula 1>` |
-| `<nombre 2>` | `<cédula 2>` |
+**Integrante:** Hanna Licona
 
 **Fecha de entrega:** 30 de octubre de 2026  
 **Período académico:** II semestre de 2026
@@ -377,19 +372,17 @@ derivada.
 
 # 7. 💭 Conclusiones personales
 
-## 7.1. Conclusión de `<integrante 1>`
+## 7.1. Conclusión de Hanna Licona
 
 La práctica permitió comprobar que una firma digital no cifra necesariamente
 el mensaje, sino que demuestra su integridad y autenticidad. También se
 comprendió la importancia de proteger la clave privada y de no incluirla en un
 repositorio público.
 
-## 7.2. Conclusión de `<integrante 2>`
-
-El laboratorio mostró la diferencia entre cifrado simétrico, criptografía
-asimétrica, hashing y firmas. Libsodium facilita operaciones seguras como
-`secretbox`, Ed25519 y Argon2id, mientras OpenSSL resulta útil cuando se
-necesita compatibilidad con RSA, AES y certificados.
+Además, el laboratorio mostró la diferencia entre cifrado simétrico,
+criptografía asimétrica, hashing y firmas. Libsodium facilita operaciones
+seguras como `secretbox`, Ed25519 y Argon2id, mientras OpenSSL resulta útil
+cuando se necesita compatibilidad con RSA, AES y certificados.
 
 ---
 
