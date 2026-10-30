@@ -1,0 +1,14 @@
+# Generated cryptographic material
+private.key
+keys/private_key.pem
+keysCert/privkey.pem
+keysCert/certout.csr
+keys/signature.dat
+
+# Public keys generated locally alongside private keys
+public.key
+keys/public_key.pem
+
+# Local PHP/OpenSSL configuration
+.env
+*.local
