@@ -188,18 +188,59 @@ inválida cuando el mensaje cambia, y coincidencia de contraseña.
 
 ![Código del ejemplo de Libsodium](Imagenes/figura-10.png)
 
+**Explicación:** esta imagen muestra la estructura principal de
+`sodiumEjemplo.php`. El script identifica la operación seleccionada
+(`cifrar`, `descifrar`, `firmar` o `hash`) y procesa la solicitud `POST`.
+También se observa que el texto se escapa antes de mostrarse en HTML y que se
+generan valores aleatorios para el `salt` y el `nonce`. Esto evita reutilizar
+valores criptográficos y reduce riesgos de XSS en la salida.
+
 ![Cifrado autenticado](Imagenes/figura-12.png)
+
+**Explicación:** en esta captura se cifra el dato sensible `cedula` mediante
+una contraseña. Libsodium genera un `salt`, deriva una clave con Argon2id y
+crea un nonce. Después, `sodium_crypto_secretbox()` cifra el mensaje con
+XSalsa20-Poly1305. El resultado presenta el `salt`, el `nonce`, el mensaje
+cifrado y el paquete completo en Base64. La clave derivada no se muestra.
 
 ![Descifrado correcto](Imagenes/figura-13.png)
 
+**Explicación:** aquí se pega el paquete cifrado y se introduce la contraseña.
+El programa separa el `salt`, el `nonce` y el texto cifrado, vuelve a derivar la
+misma clave y ejecuta `sodium_crypto_secretbox_open()`. El resultado
+`Descifrado correcto` y el texto `cedula` demuestran que el paquete no fue
+alterado y que la contraseña es válida.
+
 ![Firma digital Ed25519](Imagenes/figura-14.png)
+
+**Explicación:** esta imagen muestra la operación de firma digital. Se genera
+un par de claves Ed25519, se firma el mensaje con la clave privada y se
+entregan la firma y la clave pública codificadas en Base64. La clave privada
+se utiliza internamente y no se presenta al usuario, mientras que la clave
+pública puede compartirse para verificar la firma.
 
 ![Firma inválida después de modificar el mensaje](Imagenes/figura-15.png)
 
+**Explicación:** en esta prueba se modifica el mensaje después de generar la
+firma. Aunque se utilicen la misma firma y clave pública, la verificación
+devuelve `Firma inválida`. Esto demuestra la integridad: un solo cambio en el
+mensaje altera su huella criptográfica y hace que la firma ya no corresponda.
+
 ![Hash Argon2id](Imagenes/figura-16.png)
+
+**Explicación:** la captura muestra la generación de un hash para una
+contraseña. `sodium_crypto_pwhash_str()` utiliza Argon2id, incorpora un `salt`
+aleatorio y guarda los parámetros de costo dentro del resultado. Por eso la
+contraseña original no se almacena y una misma contraseña puede producir hashes
+distintos.
 
 ![Verificación de contraseña](Imagenes/figura-17.png)
 
+**Explicación:** finalmente, el hash generado se coloca en el campo de
+verificación junto con una contraseña de prueba. La función
+`sodium_crypto_pwhash_str_verify()` recalcula la comprobación usando los
+parámetros incluidos en el hash. El mensaje `La contraseña coincide` indica
+que la contraseña probada es correcta sin revelar la contraseña almacenada.
 ## 4.9. Resumen de las funciones utilizadas
 
 | Función | Para qué sirve |
